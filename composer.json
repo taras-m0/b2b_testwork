@@ -1,0 +1,24 @@
+{
+    "repositories" :
+    [
+        {
+            "type" : "git",
+            "url" : "https://github.com/AgeWap/php-activerecord"
+        }
+    ],
+    "require": {
+        "robmorgan/phinx": "*",
+        "php-activerecord/php-activerecord": "dev-master"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "echo '#!/bin/sh\nvendor/bin/phinx $1\nredis-cli KEYS get_meta_data-* | xargs redis-cli DEL' >migration && chmod +x migration"
+        ],
+        "migrate": [
+            "vendor/bin/phinx migrate -c phinx.php -e dev"
+        ],
+        "migrate_win": [
+            "vendor\\bin\\phinx migrate -c phinx.php -e dev"
+        ]
+    }
+}
