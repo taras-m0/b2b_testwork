@@ -86,6 +86,7 @@ class controller {
 
                 if(preg_match('/200/', $http_response_header[0])){
                     $order->state = \Model\Order::STATE_PAYED;
+                    $order->save();
                     return 'success';
                 }else{
                     return "https://ya.ru not code 200";
